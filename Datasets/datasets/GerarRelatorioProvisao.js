@@ -13,6 +13,8 @@ function createDataset(fields, constraints, sortFields) {
 		for (i = 0; i < constraints.length; i++) {
 			if (constraints[i].fieldName == "IDMOV") {
 				pIdmov = constraints[i].initialValue;
+
+				log.warn("man,: " + pIdmov);
 			}
 			if (constraints[i].fieldName == "CODCOLIGADA") {
 				pCodColigada = constraints[i].initialValue;
@@ -68,17 +70,19 @@ function createDataset(fields, constraints, sortFields) {
 				// HOMOLOGACAO
 				var IdRelatorio = 218; // NU003.01 - Fundo Fixo
 				//var IdRelatorio = 171; // NU003.01 - Fundo Fixo
+				
+			} else if (CodigoColigadaRel == "2" || CodigoColigadaRel == 2) {
+				var IdRelatorio = 11466; // NU003.01 - Fundo Fixo
+			} else if (CodigoColigadaRel == "12" || CodigoColigadaRel == 12) {
+				var IdRelatorio = 10018; // NU003.01 - Fundo Fixo
 			}
 			// solicita a geração do realtório e armazena o identificador único
 
 			var guid = authIwsDataServer.generateReport(parseInt(CodigoColigadaRel), IdRelatorio, filtros, parametros, NomeRelatorio); //contexto
 
-			log.info("Quid DS" + guid)
-
 			// recupera o tamanho do relatório gerado
 			var size = authIwsDataServer.getGeneratedReportSize(guid);
 
-			log.info("Size DS" + size)
 
 			//log.info("RESULT size = "+size);
 
@@ -99,8 +103,6 @@ function createDataset(fields, constraints, sortFields) {
 			}
 
 			result = rptstr;
-
-			log.info("Chunk DS" + result)
 
 			// result = authIwsDataServer.getFileChunk(guid, offset, size);
 
@@ -125,7 +127,6 @@ function createDataset(fields, constraints, sortFields) {
 			else {
 				dataset.addRow(new Array(true, result));
 			}
-			//log.info("RELATORIO: " + result);
 
 			return dataset;
 
