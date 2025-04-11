@@ -58,10 +58,12 @@ function createDataset(fields, constraints, sortFields) {
 			var idsRelatorios = {
 				PRODUCAO:{
 					COLIGADA_1:9212,
+					COLIGADA_6:12033,
 					COLIGADA_12:10026,
 				},
 				HOMOLOGACAO:{
 					COLIGADA_1:9212,
+					COLIGADA_6:12033,
 					COLIGADA_12:10026,
 				}
 			};
